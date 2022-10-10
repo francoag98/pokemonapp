@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 const getAll = async () => {
   const pokemones = await fetch(
@@ -49,19 +49,45 @@ const getByName = async (name) => {
   if (!name) throw Error("Info missing");
   try {
     const pokeDbName = Pokemon.findOne({ where: { name: name } });
-    console.log(pokeDbName);
-    if (name === pokeDbName.name) return pokeDbName;
+    if(!pokeDbName) throw Error("Pokemon does not exist");
+    return pokeDbName;
   } catch (error) {
-    const pokeapiname = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?name=${name}`
-    ).then((response) => response.json());
-    if (name === pokeapiname.name) return pokeapiname;
-    console.log(pokeapiname);
+    const pokeApiName = await getAll()
+    let pokeApName = pokeApiName.find(pokemon => pokemon.name === name);
+    if(!pokeApName) throw Error("Pokemon does not exist");
+    return pokeApName;
   }
 };
 
+const getType = async(type)=>{
+if(!type) throw Error("info Missing")
+const pokeType = await fetch(`https://pokeapi.co/api/v2/type`).then(response => response.json())
+
+const results = pokeType.results;
+console.log("1", results);
+const typePoke = results.map(typePoke => {
+  const typeObj = {
+    name: typePoke.name
+  }
+  const create = Type.create(typeObj)
+  console.log("2",create);
+  return create;
+})
+const resultado = await Promise.all(typePoke)
+console.log("3",resultado);
+const pushType = await Type.bulkCreate(resultado)
+
+const pokemones = await getAll()
+console.log("4",pokemones);
+const sameType = pokemones.map(pokemon => pokemon.type === type)
+console.log("5",sameType);
+return JSON.parse(sameType);
+
+
+}
 module.exports = {
   getAll,
   getOne,
   getByName,
+  getType
 };
