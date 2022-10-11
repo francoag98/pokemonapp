@@ -3,31 +3,23 @@ const routers = require("express").Router();
 const {
   getAll,
   getOne,
-  getByName,
   getType,
-  getFromUrl,
+  getByNameApi,
+  getByNameDb,
 } = require("../controllers/getController");
 const { Type } = require("../db");
 
 routers.get("/", async (req, res) => {
-  try {
-    const pokemons = await getAll();
-    if (!pokemons) throw Error("Pokemon does not exist");
-    res.status(200).json(pokemons);
-  } catch (error) {
-    res.status(400).send({ message: error.message });
-  }
-});
-routers.get("/", async (req, res) => {
   const { name } = req.query;
   try {
     if (name) {
-      const pokemon = await getByName(name);
-      res.status(200).send(pokemon);
-    } else {
-      const pokemons = await getAll();
-      res.status(200).send(pokemons);
+      const pokeDb = await getByNameDb(name);
+      if (pokeDb) return res.status(200).send(pokeDb);
+      const pokemon = await getByNameApi(name);
+      if (pokemon) return res.status(200).send(pokemon);
     }
+    const pokemones = await getAll();
+    return res.status(200).send(pokemones);
   } catch (error) {
     res.status(400).send({ message: error.message });
   }

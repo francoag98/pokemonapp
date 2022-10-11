@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const { Pokemon, Type } = require("../db");
+const { Pokemon } = require("../db");
 
 const getAll = async () => {
   const pokemones = await fetch(
@@ -59,12 +59,14 @@ const getOne = async (id) => {
   }
 };
 
-const getByName = async (name) => {
+const getByNameApi = async (name) => {
   if (!name) throw Error("Info missing");
   const pokemones = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${name}`
   ).then((response) => response.json());
-  if (pokemones.name === name) {
+  if (pokemones.name !== name) {
+    throw Error("Pokemon does not exist");
+  } else {
     const pokeName = {
       id: pokemones.id,
       name: pokemones.name,
@@ -77,12 +79,14 @@ const getByName = async (name) => {
       img: pokemones.sprites.front_default,
       type: pokemones.types.map((e) => e.type.name),
     };
-    console.log(pokeName);
-    return pokeName;
   }
-  const nameDb = await Pokemon.findOne({ where: { name } });
-  if (!nameDb) throw Error("Pokemon does not exist");
-  return nameDb;
+};
+
+const getByNameDb = async (name) => {
+  if (!name) throw Error("Info missing");
+  const findName = await Pokemon.findOne({ where: { name } });
+  console.log(findName);
+  if (findName) return findName;
 };
 
 const getType = async () => {
@@ -102,6 +106,7 @@ const getType = async () => {
 module.exports = {
   getAll,
   getOne,
-  getByName,
+  getByNameApi,
   getType,
+  getByNameDb,
 };
