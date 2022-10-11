@@ -1,9 +1,11 @@
 const routers = require("express").Router();
+
 const {
   getAll,
   getOne,
   getByName,
   getType,
+  getFromUrl,
 } = require("../controllers/getController");
 const { Type } = require("../db");
 

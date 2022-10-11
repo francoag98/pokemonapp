@@ -41,19 +41,44 @@ const getOne = async (id) => {
     const pokeapi = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(
       (response) => response.json()
     );
-    if (pokeapi.id === parseInt(id)) return pokeapi;
+    if (pokeapi.id === parseInt(id)) {
+      const poke = {
+        id: pokeapi.id,
+        name: pokeapi.name,
+        hp: pokeapi.stats[0].base_stat,
+        attack: pokeapi.stats[1].base_stat,
+        defense: pokeapi.stats[2].base_stat,
+        speed: pokeapi.stats[5].base_stat,
+        height: pokeapi.height,
+        weight: pokeapi.weight,
+        img: pokeapi.sprites.front_default,
+        type: pokeapi.types.map((e) => e.type.name),
+      };
+      return poke;
+    }
   }
 };
 
 const getByName = async (name) => {
   if (!name) throw Error("Info missing");
-  const pokemones = await getAll();
-  console.log("1", pokemones);
-  if (pokemones) {
-    const pokemonsName = pokemones.filter((pokemon) => pokemon.name === name);
-    console.log("2", pokemonsName);
-    if (!pokemonsName) throw Error("Pokemon does not exist");
-    return pokemonsName;
+  const pokemones = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${name}`
+  ).then((response) => response.json());
+  if (pokemones.name === name) {
+    const pokeName = {
+      id: pokemones.id,
+      name: pokemones.name,
+      hp: pokemones.stats[0].base_stat,
+      attack: pokemones.stats[1].base_stat,
+      defense: pokemones.stats[2].base_stat,
+      speed: pokemones.stats[5].base_stat,
+      height: pokemones.height,
+      weight: pokemones.weight,
+      img: pokemones.sprites.front_default,
+      type: pokemones.types.map((e) => e.type.name),
+    };
+    console.log(pokeName);
+    return pokeName;
   }
   const nameDb = await Pokemon.findOne({ where: { name } });
   if (!nameDb) throw Error("Pokemon does not exist");
@@ -73,6 +98,7 @@ const getType = async () => {
   });
   return types;
 };
+
 module.exports = {
   getAll,
   getOne,
