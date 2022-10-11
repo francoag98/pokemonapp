@@ -1,5 +1,11 @@
 const routers = require("express").Router();
-const { getAll, getOne, getByName, getType } = require("../controllers/getController");
+const {
+  getAll,
+  getOne,
+  getByName,
+  getType,
+} = require("../controllers/getController");
+const { Type } = require("../db");
 
 routers.get("/", async (req, res) => {
   try {
@@ -10,28 +16,31 @@ routers.get("/", async (req, res) => {
     res.status(400).send({ message: error.message });
   }
 });
-routers.get("/?name", async (req, res) => {
+routers.get("/", async (req, res) => {
   const { name } = req.query;
   try {
-    const pokemon = await getByName(name);
-    console.log(pokemon);
-    res.status(200).send(pokemon);
+    if (name) {
+      const pokemon = await getByName(name);
+      res.status(200).send(pokemon);
+    } else {
+      const pokemons = await getAll();
+      res.status(200).send(pokemons);
+    }
   } catch (error) {
     res.status(400).send({ message: error.message });
   }
 });
 
-routers.get("/type", async (req,res)=>{
-  const {type} = req.body
+routers.get("/type", async (req, res) => {
   try {
-    const pokemon = await getType(type);
-    if(!pokemon) throw Error("Pokemon that type does not exist");
-    res.status(200).json(pokemon)
-
+    const types = await getType();
+    if (!types) throw Error("Pokemon that type does not exist");
+    const createType = await Type.bulkCreate(types);
+    res.status(200).send(createType);
   } catch (error) {
-    res.status(400).send({message: error.message})
+    res.status(400).send({ message: error.message });
   }
-})
+});
 
 routers.get("/:id", async (req, res) => {
   const { id } = req.params;

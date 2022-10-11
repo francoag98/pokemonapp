@@ -47,47 +47,35 @@ const getOne = async (id) => {
 
 const getByName = async (name) => {
   if (!name) throw Error("Info missing");
-  try {
-    const pokeDbName = Pokemon.findOne({ where: { name: name } });
-    if(!pokeDbName) throw Error("Pokemon does not exist");
-    return pokeDbName;
-  } catch (error) {
-    const pokeApiName = await getAll()
-    let pokeApName = pokeApiName.find(pokemon => pokemon.name === name);
-    if(!pokeApName) throw Error("Pokemon does not exist");
-    return pokeApName;
+  const pokemones = await getAll();
+  console.log("1", pokemones);
+  if (pokemones) {
+    const pokemonsName = pokemones.filter((pokemon) => pokemon.name === name);
+    console.log("2", pokemonsName);
+    if (!pokemonsName) throw Error("Pokemon does not exist");
+    return pokemonsName;
   }
+  const nameDb = await Pokemon.findOne({ where: { name } });
+  if (!nameDb) throw Error("Pokemon does not exist");
+  return nameDb;
 };
 
-const getType = async(type)=>{
-if(!type) throw Error("info Missing")
-const pokeType = await fetch(`https://pokeapi.co/api/v2/type`).then(response => response.json())
+const getType = async () => {
+  const pokeType = await fetch(`https://pokeapi.co/api/v2/type`)
+    .then((response) => response.json())
+    .then((data) => data.results);
 
-const results = pokeType.results;
-console.log("1", results);
-const typePoke = results.map(typePoke => {
-  const typeObj = {
-    name: typePoke.name
-  }
-  const create = Type.create(typeObj)
-  console.log("2",create);
-  return create;
-})
-const resultado = await Promise.all(typePoke)
-console.log("3",resultado);
-const pushType = await Type.bulkCreate(resultado)
-
-const pokemones = await getAll()
-console.log("4",pokemones);
-const sameType = pokemones.map(pokemon => pokemon.type === type)
-console.log("5",sameType);
-return JSON.parse(sameType);
-
-
-}
+  const types = pokeType.map((pokemon) => {
+    const newType = {
+      name: pokemon.name,
+    };
+    return newType;
+  });
+  return types;
+};
 module.exports = {
   getAll,
   getOne,
   getByName,
-  getType
+  getType,
 };
