@@ -60,6 +60,7 @@ const getByNameApi = async (name) => {
   const pokemones = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${name}`
   ).then((response) => response.json());
+
   if (pokemones.name !== name) {
     throw Error("Pokemon does not exist");
   } else {
@@ -75,6 +76,7 @@ const getByNameApi = async (name) => {
       img: pokemones.sprites.front_default,
       type: pokemones.types.map((e) => e.type.name),
     };
+    console.log(pokeName);
     return pokeName;
   }
 };
@@ -83,7 +85,21 @@ const getByNameDb = async (name) => {
   if (!name) throw Error("Info missing");
   const findName = await Pokemon.findOne({ where: { name } });
   console.log(findName);
-  if (findName) return findName;
+  if (findName) {
+    const poke = {
+      id: findName.id,
+      name: findName.name,
+      hp: findName.hp,
+      attack: findName.attack,
+      defense: findName.defense,
+      speed: findName.speed,
+      height: findName.height,
+      weight: findName.weight,
+      img: findName.img,
+      type: findName.type.map((e) => e.name),
+    };
+    return poke;
+  }
 };
 
 const getType = async () => {
@@ -93,6 +109,7 @@ const getType = async () => {
 
   const types = pokeType.map((pokemon) => {
     const newType = {
+      id: pokemon.id,
       name: pokemon.name,
     };
     return newType;

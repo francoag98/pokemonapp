@@ -3,6 +3,11 @@ export const GET_POKEMONS = "GEL_ALL";
 export const GET_POKEMON = "GET_POKEMON";
 export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_BY_NAME = "GET_BY_NAME";
+export const GET_TYPE = "GET_TYPE";
+export const FILTER_ASCENDENTE = "FILTER_ASCENDENTE";
+export const FILTER_DESCENDENTE = "FILTER_DESCENDENTE";
+export const FILTER_ATTACK = "FILTER_ATTACK";
+export const CLEAR_DETAIL_POKEMON = "CLEAR_DETAIL_POKEMON";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
@@ -15,9 +20,9 @@ export const getPokemons = () => (dispatch) => {
 export const searchByName = (name) => (dispatch) => {
   return axios
     .get(`http://localhost:3001/pokemons?name=${name}`)
-    .then((response) =>
-      dispatch({ type: GET_BY_NAME, payload: response.data })
-    );
+    .then((response) => {
+      return dispatch({ type: GET_BY_NAME, payload: response.data });
+    });
 };
 
 //Obtenemos un solo pokemon
@@ -27,7 +32,30 @@ export const getPokemon = (id) => (dispatch) => {
     .then((data) => dispatch({ type: GET_POKEMON, payload: data }));
 };
 
+//Obtenemos los types de los pokemons
+export const getType = () => (dispatch) => {
+  return fetch("http://localhost:3001/pokemons/type")
+    .then((response) => response.json())
+    .then((data) => dispatch({ type: GET_TYPE, payload: data }));
+};
+
+export const clearDetailPokemon = (dispatch) => {
+  return { type: CLEAR_DETAIL_POKEMON };
+};
+
 //Creamos un pokemon
 export const createPokemon = (args) => {
   return { type: CREATE_POKEMON, payload: args };
+};
+
+export const filterAsc = () => {
+  return { type: FILTER_ASCENDENTE };
+};
+
+export const filterDesc = () => {
+  return { type: FILTER_DESCENDENTE };
+};
+
+export const filterAttack = () => {
+  return { type: FILTER_ATTACK };
 };

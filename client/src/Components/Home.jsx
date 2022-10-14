@@ -5,12 +5,12 @@ import { useState } from "react";
 import { useSelector} from "react-redux";
 
 
+
 export const Home = ()=>{
 
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
-    const {pokemons} = useSelector(state => state)
-
+    const pokemons = useSelector(state => state.pokemons)
 
     const lastIndex = currentPage * pokemonsPerPage;
     const firstIndex = lastIndex - pokemonsPerPage;
