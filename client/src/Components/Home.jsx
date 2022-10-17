@@ -3,8 +3,13 @@ import  {Pokemons}  from "./Pokemons";
 import { Paginado}  from "./Paginado";
 import { useState } from "react";
 import { useSelector} from "react-redux";
+import styled from "styled-components";
 
-
+const Flex = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+`
 
 export const Home = ()=>{
 
@@ -17,14 +22,19 @@ export const Home = ()=>{
     const currentPokemon = pokemons.slice(firstIndex, lastIndex);
 
     return (
-        <div>
-            <Pokemons pokemons={currentPokemon}/>
-            <Paginado
-             totalPokemons={pokemons.length}
-             pokemonsPerPage={pokemonsPerPage}
-             setCurrentPage={setCurrentPage}
-             currentPage={currentPage}
-             />
-        </div>
+        <Flex>
+            <div>
+                <Pokemons pokemons={currentPokemon}/>
+            </div>
+
+            <div>
+                <Paginado
+                totalPokemons={pokemons.length}
+                pokemonsPerPage={pokemonsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+                />
+            </div>
+        </Flex>
     )
 }

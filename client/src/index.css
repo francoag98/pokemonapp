@@ -6,7 +6,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("../img/pokemon-go-4k-red-bird-emblem-logo.jpg");
+  background-image: url("./img/42a60b439d517bdf2310657497950cc8.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:inherit;
 }
 
 code {

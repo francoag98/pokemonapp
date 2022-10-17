@@ -1,4 +1,15 @@
 import React from "react";
+import styled from "styled-components";
+
+
+const StyledButton = styled.button`
+border: none;
+margin: 10px 10px;
+border-radius: 50%;
+font-size: 20px;
+padding: 0.8rem;
+cursor: pointer;
+`
 
 export const Paginado = ({totalPokemons, pokemonsPerPage, setCurrentPage, currentPage})=>{
     let pages = [];
@@ -10,12 +21,12 @@ export const Paginado = ({totalPokemons, pokemonsPerPage, setCurrentPage, curren
         <div>
             {pages.map((page, index) => {
                 return (
-                    <button
+                    <StyledButton
                         key={index}
                         onClick={() => setCurrentPage(page)}
                         className={page === currentPage ? "active" : ""}>
                         {page}
-                    </button>
+                    </StyledButton>
                 );
             })}
         </div>

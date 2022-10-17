@@ -11,6 +11,7 @@ import {
 } from "../actions/actions";
 
 const initialState = {
+  allPokemons: [],
   pokemons: [],
   pokemon: {},
   types: [],
@@ -27,6 +28,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: action.payload,
+        allPokemons: action.payload,
       };
     case CREATE_POKEMON:
       return {
@@ -51,9 +53,11 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_BY_TYPE:
       return {
         ...state,
-        pokemons: state.pokemons.filter((pokemon) =>
-          pokemon.type.includes(action.payload)
-        ),
+        pokemons: [
+          ...state.allPokemons.filter((pokemon) =>
+            pokemon.type.includes(action.payload)
+          ),
+        ],
       };
     case FILTER_ASCENDENTE:
       return {
