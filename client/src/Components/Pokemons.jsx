@@ -11,9 +11,10 @@ export const Pokemons = (props)=>{
     const dispatch = useDispatch()
     const types = useSelector(state => state.types)
 
-    const selectType = (e)=>{
-        const type = e.target.value
-        dispatch(getByType(type))
+    const selectType =(e)=>{
+        const type =e.target.value
+        const result = getByType(type)
+        dispatch(result)
     }
 
     useEffect(()=>{
