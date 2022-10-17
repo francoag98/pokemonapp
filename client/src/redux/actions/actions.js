@@ -8,6 +8,7 @@ export const FILTER_ASCENDENTE = "FILTER_ASCENDENTE";
 export const FILTER_DESCENDENTE = "FILTER_DESCENDENTE";
 export const FILTER_ATTACK = "FILTER_ATTACK";
 export const CLEAR_DETAIL_POKEMON = "CLEAR_DETAIL_POKEMON";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
@@ -37,6 +38,10 @@ export const getType = () => (dispatch) => {
   return fetch("http://localhost:3001/pokemons/type")
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_TYPE, payload: data }));
+};
+
+export const getByType = (type) => {
+  return { type: FILTER_BY_TYPE, payload: type };
 };
 
 export const clearDetailPokemon = (dispatch) => {

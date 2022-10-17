@@ -7,6 +7,7 @@ import {
   FILTER_ASCENDENTE,
   FILTER_DESCENDENTE,
   CLEAR_DETAIL_POKEMON,
+  FILTER_BY_TYPE,
 } from "../actions/actions";
 
 const initialState = {
@@ -46,6 +47,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemon: {},
+      };
+    case FILTER_BY_TYPE:
+      return {
+        ...state,
+        pokemons: state.pokemons.filter((pokemon) =>
+          pokemon.type.includes(action.payload)
+        ),
       };
     case FILTER_ASCENDENTE:
       return {

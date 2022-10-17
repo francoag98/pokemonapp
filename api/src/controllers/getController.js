@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 const getAll = async () => {
   const pokemones = await fetch(
@@ -25,7 +25,23 @@ const getAll = async () => {
     return pokemons;
   });
   const allPokemons = await Promise.all(data);
-  return allPokemons;
+  const pokeDb = await Pokemon.findAll({ include: Type });
+  const pokeTransform = pokeDb.map((pokemon) => pokemon.toJSON());
+  return [
+    ...allPokemons,
+    ...pokeTransform.map((poke) => ({
+      id: poke.id,
+      name: poke.name,
+      hp: poke.hp,
+      attack: poke.attack,
+      defense: poke.defense,
+      speed: poke.speed,
+      height: poke.height,
+      weight: poke.weight,
+      img: poke.img,
+      type: poke.Types.map((e) => e.type.name),
+    })),
+  ];
 };
 
 const getOne = async (id) => {
