@@ -10,7 +10,10 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 `
+const Margin = styled.div`
+margin-right: 11rem;
 
+`
 export const Home = ()=>{
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,14 +30,14 @@ export const Home = ()=>{
                 <Pokemons pokemons={currentPokemon}/>
             </div>
 
-            <div>
+            <Margin>
                 <Paginado
                 totalPokemons={pokemons.length}
                 pokemonsPerPage={pokemonsPerPage}
                 setCurrentPage={setCurrentPage}
                 currentPage={currentPage}
                 />
-            </div>
+            </Margin>
         </Flex>
     )
 }

@@ -35,6 +35,11 @@ const Pokemon = (sequelize) => {
       img: {
         type: DataTypes.STRING,
       },
+      createdInDb: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
     { timestamps: false }
   );

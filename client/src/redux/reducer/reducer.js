@@ -8,6 +8,8 @@ import {
   FILTER_DESCENDENTE,
   CLEAR_DETAIL_POKEMON,
   FILTER_BY_TYPE,
+  FILTER_ATTACK,
+  FILTER_CREATED,
 } from "../actions/actions";
 
 const initialState = {
@@ -59,31 +61,59 @@ const rootReducer = (state = initialState, action) => {
           ),
         ],
       };
+    case FILTER_ATTACK:
+      return {
+        ...state,
+        pokemons: [
+          ...state.allPokemons.sort((a, b) => {
+            if (a.attack > b.attack) {
+              return -1;
+            }
+            if (a.attack < b.attack) {
+              return 1;
+            }
+            return 0;
+          }),
+        ],
+      };
     case FILTER_ASCENDENTE:
       return {
         ...state,
-        pokemons: state.pokemons.sort((a, b) => {
-          if (a.name > b.name) {
-            return -1;
-          }
-          if (a.name < b.name) {
-            return 1;
-          }
-          return 0;
-        }),
+        pokemons: [
+          ...state.allPokemons.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          }),
+        ],
       };
     case FILTER_DESCENDENTE:
       return {
         ...state,
-        pokemons: state.pokemons.sort((a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        }),
+        pokemons: [
+          ...state.allPokemons.sort((a, b) => {
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (a.name < b.name) {
+              return 1;
+            }
+            return 0;
+          }),
+        ],
+      };
+    case FILTER_CREATED:
+      const allDataBase =
+        action.payload === "created"
+          ? state.allPokemons.filter((el) => el.createdInDb)
+          : state.allPokemons.filter((el) => !el.createdInDb);
+      return {
+        ...state,
+        pokemons: allDataBase,
       };
     default:
       return { ...state };

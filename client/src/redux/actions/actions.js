@@ -9,10 +9,11 @@ export const FILTER_DESCENDENTE = "FILTER_DESCENDENTE";
 export const FILTER_ATTACK = "FILTER_ATTACK";
 export const CLEAR_DETAIL_POKEMON = "CLEAR_DETAIL_POKEMON";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
+export const FILTER_CREATED = "FILTER_CREATED";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
-  return fetch("http://localhost:3001/pokemons")
+  return fetch("http://localhost:3002/pokemons")
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_POKEMONS, payload: data }));
 };
@@ -20,7 +21,7 @@ export const getPokemons = () => (dispatch) => {
 //Busqueda por nombre
 export const searchByName = (name) => (dispatch) => {
   return axios
-    .get(`http://localhost:3001/pokemons?name=${name}`)
+    .get(`http://localhost:3002/pokemons?name=${name}`)
     .then((response) => {
       return dispatch({ type: GET_BY_NAME, payload: response.data });
     });
@@ -28,14 +29,14 @@ export const searchByName = (name) => (dispatch) => {
 
 //Obtenemos un solo pokemon
 export const getPokemon = (id) => (dispatch) => {
-  return fetch(`http://localhost:3001/pokemons/${id}`)
+  return fetch(`http://localhost:3002/pokemons/${id}`)
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_POKEMON, payload: data }));
 };
 
 //Obtenemos los types de los pokemons
 export const getType = () => (dispatch) => {
-  return fetch("http://localhost:3001/pokemons/type")
+  return fetch("http://localhost:3002/pokemons/type")
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_TYPE, payload: data }));
 };
@@ -44,7 +45,7 @@ export const getByType = (type) => {
   return { type: FILTER_BY_TYPE, payload: type };
 };
 
-export const clearDetailPokemon = (dispatch) => {
+export const clearDetailPokemon = () => {
   return { type: CLEAR_DETAIL_POKEMON };
 };
 
@@ -63,4 +64,8 @@ export const filterDesc = () => {
 
 export const filterAttack = () => {
   return { type: FILTER_ATTACK };
+};
+
+export const filterCreated = (data) => {
+  return { type: FILTER_CREATED, payload: data };
 };

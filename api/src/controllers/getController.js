@@ -40,6 +40,7 @@ const getAll = async () => {
       weight: poke.weight,
       img: poke.img,
       type: poke.Types.map((e) => e.type.name),
+      createdInDb: poke.createdInDb,
     })),
   ];
 };

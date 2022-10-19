@@ -3,9 +3,15 @@ import { Link} from "react-router-dom";
 import styled from "styled-components";
 
 const NewDiv = styled.div`
-width: 350px;
-height: 350px;
-backdrop-filter: blur(30px);
+padding: 0.2rem;
+backdrop-filter: blur(10px);
+&:hover {
+    transform: scale(1.15);
+    transition: 0.4s;
+    box-shadow: -1px 2px 26px 3px rgba(0,0,0,0.88);
+-webkit-box-shadow: -1px 2px 26px 3px rgba(0,0,0,0.88);
+-moz-box-shadow: -1px 2px 26px 3px rgba(0,0,0,0.88);
+}
 `
 const StyledLink = styled(Link)`
 text-decoration: none;
