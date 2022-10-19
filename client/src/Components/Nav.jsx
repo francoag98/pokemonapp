@@ -7,9 +7,10 @@ import styled from "styled-components";
 const Input = styled.input`
 border: none;
 background:transparent;
-color: white;
-whidth: 80%;
-border-bottom: 1px solid white;
+color: black;
+max-whidth: 100%;
+width: 20rem;
+border-bottom: 1px solid black;
 padding: 0.5rem;
 `
 
@@ -18,28 +19,29 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-
+width: 100%;
+gap: 1rem;
 `
 const Buttons = styled.button`
 border: none;
 background-color: transparent;
-border: 1px solid white;
+border: 1px solid black;
 padding: 0.5rem;
-color: white;
+color: black;
 margin: 0 10px;
 cursor: pointer;
 `
 
 const Parraf = styled.p`
 text-decoration: none;
-color: white;
+color: black;
 text-transform: uppercase;
-border: 1px solid white;
+border: 1px solid black;
 padding: 0.32rem;
 &:hover {
-    background-color: white;
-    color:purple;
-    text-decoration: none;
+    background-color: black;
+    color: white;
+    transition: 0.3s;
 }
 `
 const Linked = styled(Link)`

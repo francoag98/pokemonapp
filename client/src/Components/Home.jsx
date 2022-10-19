@@ -11,7 +11,8 @@ flex-direction: column;
 justify-content: center;
 `
 const Margin = styled.div`
-margin-right: 11rem;
+margin-right: 24.7rem;
+margin-bottom: 3rem;
 
 `
 export const Home = ()=>{

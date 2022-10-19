@@ -5,10 +5,15 @@ import styled from "styled-components";
 const StyledButton = styled.button`
 border: none;
 margin: 10px 10px;
+border: 1px solid black;
 border-radius: 50%;
 font-size: 20px;
 padding: 0.8rem;
 cursor: pointer;
+&:hover {
+    background-color: black;
+    color: white;
+}
 `
 
 export const Paginado = ({totalPokemons, pokemonsPerPage, setCurrentPage, currentPage})=>{

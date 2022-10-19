@@ -39,7 +39,7 @@ const getAll = async () => {
       height: poke.height,
       weight: poke.weight,
       img: poke.img,
-      type: poke.Types.map((e) => e.type.name),
+      type: poke.Types.map((e) => e.name),
       createdInDb: poke.createdInDb,
     })),
   ];
@@ -125,11 +125,8 @@ const getType = async () => {
     .then((data) => data.results);
 
   const types = pokeType.map((pokemon) => {
-    const newType = {
-      id: pokemon.id,
-      name: pokemon.name,
-    };
-    return newType;
+    const type = Type.findOrCreate({ where: { name: pokemon.name } });
+    return type;
   });
   return types;
 };

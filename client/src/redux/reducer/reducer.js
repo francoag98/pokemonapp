@@ -10,6 +10,7 @@ import {
   FILTER_BY_TYPE,
   FILTER_ATTACK,
   FILTER_CREATED,
+  REFRESH,
 } from "../actions/actions";
 
 const initialState = {
@@ -65,7 +66,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: [
-          ...state.allPokemons.sort((a, b) => {
+          ...state.pokemons.sort((a, b) => {
             if (a.attack > b.attack) {
               return -1;
             }
@@ -80,7 +81,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: [
-          ...state.allPokemons.sort((a, b) => {
+          ...state.pokemons.sort((a, b) => {
             if (a.name < b.name) {
               return -1;
             }
@@ -95,7 +96,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: [
-          ...state.allPokemons.sort((a, b) => {
+          ...state.pokemons.sort((a, b) => {
             if (a.name > b.name) {
               return -1;
             }
@@ -114,6 +115,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: allDataBase,
+      };
+    case REFRESH:
+      return {
+        ...state,
+        allPokemons: [...state.pokemons],
       };
     default:
       return { ...state };

@@ -10,6 +10,7 @@ export const FILTER_ATTACK = "FILTER_ATTACK";
 export const CLEAR_DETAIL_POKEMON = "CLEAR_DETAIL_POKEMON";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_CREATED = "FILTER_CREATED";
+export const REFRESH = "REFRESH";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
@@ -68,4 +69,7 @@ export const filterAttack = () => {
 
 export const filterCreated = (data) => {
   return { type: FILTER_CREATED, payload: data };
+};
+export const refresh = () => {
+  return { type: REFRESH };
 };

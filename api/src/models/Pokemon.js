@@ -27,7 +27,7 @@ const Pokemon = (sequelize) => {
         type: DataTypes.INTEGER,
       },
       height: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.INTEGER,
       },
       weight: {
         type: DataTypes.INTEGER,
@@ -38,7 +38,7 @@ const Pokemon = (sequelize) => {
       createdInDb: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
       },
     },
     { timestamps: false }

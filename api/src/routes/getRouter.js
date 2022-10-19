@@ -27,10 +27,9 @@ routers.get("/", async (req, res) => {
 
 routers.get("/type", async (req, res) => {
   try {
-    const types = await getType();
-    if (!types) throw Error("Pokemon that type does not exist");
-    const createType = await Type.bulkCreate(types);
-    res.status(200).send(createType);
+    await getType();
+    const allTypes = await Type.findAll();
+    return res.status(200).send(allTypes);
   } catch (error) {
     res.status(400).send({ message: error.message });
   }

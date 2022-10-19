@@ -5,6 +5,8 @@ import styled from "styled-components";
 const NewDiv = styled.div`
 padding: 0.2rem;
 backdrop-filter: blur(10px);
+border: 1px solid black;
+border-radius: 5%;
 &:hover {
     transform: scale(1.15);
     transition: 0.4s;
@@ -15,22 +17,20 @@ backdrop-filter: blur(10px);
 `
 const StyledLink = styled(Link)`
 text-decoration: none;
-color: White;
+color: black;
 `
 const Foto = styled.img`
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
 object-fit: contain;
 `
 const H4 = styled.h4`
 margin: 0;
 text-transform: uppercase;
-color: white;
 font-size: 18px;
 `
 const Parrafo = styled.p`
 margin: 0;
-color: white;
 font-size: 15px;
 text-transform: uppercase;
 `
