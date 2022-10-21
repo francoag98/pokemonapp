@@ -9,6 +9,8 @@ const Flex = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
+background-color: #f9f9f9;
+
 `
 const Margin = styled.div`
 margin-right: 24.7rem;

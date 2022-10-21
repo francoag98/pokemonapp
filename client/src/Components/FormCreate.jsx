@@ -57,7 +57,7 @@ export const Form = ()=>{
             }
         }
         if(change.hp || submit){
-            if(!input.hp || input.hp < 2){
+            if(!input.hp || input.hp < 2 || input.hp > 320){
                 errorCopy.hp = "Status is required"
             }else{
                 delete errorCopy.hp;
@@ -65,7 +65,7 @@ export const Form = ()=>{
         }
 
         if(change.attack || submit){
-            if(!input.attack || input.attack < 2){
+            if(!input.attack || input.attack < 2 || input.attack > 320){
                 errorCopy.attack = "Status is required"
             }else{
                 delete errorCopy.attack;
@@ -73,14 +73,14 @@ export const Form = ()=>{
         }
 
         if(change.defense || submit){
-            if(!input.defense || input.defense < 2){
+            if(!input.defense || input.defense < 2 || input.defense > 320){
                 errorCopy.defense = "Status is required"
             }else{
                 delete errorCopy.defense;
             }
         }
         if(change.speed || submit){
-            if(!input.speed || input.speed < 2){
+            if(!input.speed || input.speed < 2 || input.speed > 320){
                 errorCopy.speed = "Status is required"
             }else{
                 delete errorCopy.speed;
@@ -88,14 +88,14 @@ export const Form = ()=>{
         }
 
         if(change.height || submit){
-            if(!input.height || input.height < 2){
+            if(!input.height || input.height < 2 || input.height > 320){
                 errorCopy.height = "Status is required"
             }else{
                 delete errorCopy.height;
             }
         }
         if(change.weight || submit){
-            if(!input.weight || input.weight < 2){
+            if(!input.weight || input.weight < 2 || input.weight > 320){
                 errorCopy.weight = "Status is required"
             }else{
                 delete errorCopy.weight;
@@ -132,8 +132,8 @@ export const Form = ()=>{
     const handleSubmit = async (e)=>{
         e.preventDefault();
         if(validation(true)){
-            // await axios.post("http://localhost:3001/pokemons", input)
-            // dispatch(createPokemon())
+            await axios.post("http://localhost:3001/pokemons", input)
+            dispatch(createPokemon(input))
             alert("Pokemon Created")
         }else {
             alert("Complete form")
@@ -150,23 +150,23 @@ export const Form = ()=>{
             <input type="range" name="hp" value={input.hp} onChange={(e)=> handleChange(e)}/>
             {error.hp && <p>{error.hp}</p>}
 
-            <label htmlFor="attack">attack</label>
+            <label htmlFor="attack">attack: {input.attack}</label>
             <input type="range" name="attack" max="320" value={input.attack}  onChange={(e)=> handleChange(e)}/>
             {error.attack && <p>{error.attack}</p>}
 
-            <label htmlFor="defense">defense</label>
+            <label htmlFor="defense">defense: {input.defense}</label>
             <input type="range" name="defense" max="320" value={input.defense}  onChange={(e)=> handleChange(e)}/>
             {error.defense && <p>{error.defense}</p>}
 
-            <label htmlFor="speed">speed</label>
+            <label htmlFor="speed">speed: {input.speed}</label>
             <input type="range" name="speed" max="320" value={input.speed}  onChange={(e)=> handleChange(e)}/>
             {error.defense && <p>{error.defense}</p>}
 
-            <label htmlFor="height">height</label>
+            <label htmlFor="height">height: {input.height}</label>
             <input type="range" name="height" max="320" value={input.height} onChange={(e)=> handleChange(e)}/>
             {error.height && <p>{error.height}</p>}
 
-            <label htmlFor="weight">weight</label>
+            <label htmlFor="weight">weight: {input.weight}</label>
             <input type="range" name="weight" max="320"value={input.weight}  onChange={(e)=> handleChange(e)}/>
             {error.weight && <p>{error.weight}</p>}
 

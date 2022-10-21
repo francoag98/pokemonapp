@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getType, getByType, filterAsc, filterDesc, filterAttack, filterCreated, getPokemons, refresh } from "../redux/actions/actions";
 import styled from "styled-components";
+import logo from "../img/International_Pokémon_logo.svg.png"
 
 
 const Buttons3 = styled.button`
@@ -33,6 +34,7 @@ justify-content: center;
 gap: 10rem;
 max-widht: 90rem;
 width: 100%;
+background-color: #f4f4f4;
 margin: 0 auto;
 `
 const GridContainer = styled.div`
@@ -71,14 +73,16 @@ color: black;
 const Options2 = styled.option`
 color: black;
 `
-const Fondo = styled.main`
-background-image: url("./img/depositphotos_345626668-stock-illustration-pokeball-icon-sign-seamless-pattern")
+
+const Imagen = styled.img`
+max-width: 100%;
+width: 40rem;
+height: 8rem;
+padding: 2rem;
 `
 
-export const H1 = styled.h1`
-font-weight: bold;
-font-size: 3rem;
-margin-bottom: 4rem;
+const Bg = styled.div`
+background-color: white;
 `
 export const Pokemons = (props)=>{
     const dispatch = useDispatch()
@@ -120,7 +124,10 @@ export const Pokemons = (props)=>{
     }
     return (
         <Responsive>
-            <H1>Search your Pokemons</H1>
+            <Bg>
+
+            <Imagen src={logo} alt="logo-pokemon"/>
+            </Bg>
             <Container>
             <Aside>
                 <Parraph>Select by type</Parraph>
