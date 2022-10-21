@@ -8,9 +8,9 @@ import styled from "styled-components";
 const Flex = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: center;
-background-color: #f9f9f9;
-
+height: 100%;
+background: rgb(241,207,179);
+background: radial-gradient(circle, rgba(241,207,179,1) 0%, rgba(247,245,222,1) 100%);
 `
 const Margin = styled.div`
 margin-right: 24.7rem;

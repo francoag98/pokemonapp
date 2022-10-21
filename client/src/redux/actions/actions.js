@@ -6,11 +6,12 @@ export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_TYPE = "GET_TYPE";
 export const FILTER_ASCENDENTE = "FILTER_ASCENDENTE";
 export const FILTER_DESCENDENTE = "FILTER_DESCENDENTE";
-export const FILTER_ATTACK = "FILTER_ATTACK";
+export const FILTER_HIGH_ATTACK = "FILTER_HIGH_ATTACK";
 export const CLEAR_DETAIL_POKEMON = "CLEAR_DETAIL_POKEMON";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_CREATED = "FILTER_CREATED";
 export const REFRESH = "REFRESH";
+export const FILTER_LOW_ATTACK = "FILTER_LOW_ATTACK";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
@@ -63,8 +64,11 @@ export const filterDesc = () => {
   return { type: FILTER_DESCENDENTE };
 };
 
-export const filterAttack = () => {
-  return { type: FILTER_ATTACK };
+export const filterHighAttack = () => {
+  return { type: FILTER_HIGH_ATTACK };
+};
+export const filterLowAttack = () => {
+  return { type: FILTER_LOW_ATTACK };
 };
 
 export const filterCreated = (data) => {

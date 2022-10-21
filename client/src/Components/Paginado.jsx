@@ -5,13 +5,14 @@ import styled from "styled-components";
 const StyledButton = styled.button`
 border: none;
 margin: 10px 10px;
-border: 1px solid black;
+border: 2px solid #ef7f45;
 border-radius: 50%;
 font-size: 20px;
-padding: 0.8rem;
+padding: 0.3rem;
 cursor: pointer;
+color: #ef7f45;
 &:hover {
-    background-color: black;
+    background-color: #ef7f45;
     color: white;
 }
 `

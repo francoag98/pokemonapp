@@ -3,7 +3,7 @@ import { PokemonCard } from "./PokemonCard";
 import { NavBar } from "./Nav";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getType, getByType, filterAsc, filterDesc, filterAttack, filterCreated, getPokemons, refresh } from "../redux/actions/actions";
+import { getType, getByType, filterAsc, filterDesc, filterHighAttack, filterCreated, filterLowAttack, refresh } from "../redux/actions/actions";
 import styled from "styled-components";
 import logo from "../img/International_Pokémon_logo.svg.png"
 
@@ -11,14 +11,17 @@ import logo from "../img/International_Pokémon_logo.svg.png"
 const Buttons3 = styled.button`
 border: none;
 background-color: transparent;
-border: 1px solid black;
+border: 2px solid #ef7f45;
 padding: 0.5rem;
 widht: 100%;
+color:#ef7f45;
 margin: 0 10px;
 cursor: pointer;
 margin-top: 2rem;
+font-weight: bold;
+font-size: 1rem;
 &:hover {
-    background-color: black;
+    background-color: #ef7f45;
     color: white;
     transition: 0.3s;
 }
@@ -34,7 +37,6 @@ justify-content: center;
 gap: 10rem;
 max-widht: 90rem;
 width: 100%;
-background-color: #f4f4f4;
 margin: 0 auto;
 `
 const GridContainer = styled.div`
@@ -51,27 +53,28 @@ flex-basis: 15rem;
 margin-top: 6rem;
 `
 const Select = styled.select`
-
+color:#ef7f45;
 font-size: 20px;
 font-weight: bold;
 background-color: transparent;
 border: none;
-border-bottom: solid 1px black;
+border-bottom: solid 2px #ef7f45;
 width: 100%;
 `
 const Parraph = styled.p`
 text-transform: uppercase;
-
 text-align: left;
 font-size: 20px;
+color:#ef7f45;
+font-weight: bold;
 `
 const Options1 = styled.option`
 background-color: transparent;
 border:none;
-color: black;
+color: #ef7f45;
 `
 const Options2 = styled.option`
-color: black;
+color: #ef7f45;
 `
 
 const Imagen = styled.img`
@@ -79,10 +82,6 @@ max-width: 100%;
 width: 40rem;
 height: 8rem;
 padding: 2rem;
-`
-
-const Bg = styled.div`
-background-color: white;
 `
 export const Pokemons = (props)=>{
     const dispatch = useDispatch()
@@ -107,11 +106,13 @@ export const Pokemons = (props)=>{
             dispatch(filterAsc(value))
         }else if(value === "descendent"){
             dispatch(filterDesc(value))
-        }else if(value === "default"){
+        }else if(value === "def"){
             dispatch(refresh(value))
-        }else{
-            dispatch(filterAttack(value))
+        }else if(value === "highAttack"){
+            dispatch(filterHighAttack(value))
 
+        }else{
+            dispatch(filterLowAttack(value))
         }
     }
     const orderCreated = (e)=>{
@@ -124,10 +125,7 @@ export const Pokemons = (props)=>{
     }
     return (
         <Responsive>
-            <Bg>
-
             <Imagen src={logo} alt="logo-pokemon"/>
-            </Bg>
             <Container>
             <Aside>
                 <Parraph>Select by type</Parraph>
@@ -141,7 +139,8 @@ export const Pokemons = (props)=>{
                     <Options2 value="default" >Normal order</Options2>
                     <Options1 value="ascendent">A to Z</Options1>
                     <Options1 value="descendent">Z to A</Options1>
-                    <Options1 value="attack">Attack</Options1>
+                    <Options1 value="highAttack">+ Attack</Options1>
+                    <Options1 value="lowAttack">- Attack</Options1>
                 </Select>
                 <Parraph>Order by creation</Parraph>
                 <Select name="orderBy" onChange={(e)=> orderCreated(e)}>

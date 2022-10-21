@@ -8,9 +8,10 @@ import {
   FILTER_DESCENDENTE,
   CLEAR_DETAIL_POKEMON,
   FILTER_BY_TYPE,
-  FILTER_ATTACK,
+  FILTER_HIGH_ATTACK,
   FILTER_CREATED,
   REFRESH,
+  FILTER_LOW_ATTACK,
 } from "../actions/actions";
 
 const initialState = {
@@ -62,7 +63,7 @@ const rootReducer = (state = initialState, action) => {
           ),
         ],
       };
-    case FILTER_ATTACK:
+    case FILTER_HIGH_ATTACK:
       return {
         ...state,
         pokemons: [
@@ -71,6 +72,21 @@ const rootReducer = (state = initialState, action) => {
               return -1;
             }
             if (a.attack < b.attack) {
+              return 1;
+            }
+            return 0;
+          }),
+        ],
+      };
+    case FILTER_LOW_ATTACK:
+      return {
+        ...state,
+        pokemons: [
+          ...state.pokemons.sort((a, b) => {
+            if (a.attack < b.attack) {
+              return -1;
+            }
+            if (a.attack > b.attack) {
               return 1;
             }
             return 0;
@@ -119,7 +135,7 @@ const rootReducer = (state = initialState, action) => {
     case REFRESH:
       return {
         ...state,
-        allPokemons: [...state.pokemons],
+        pokemons: [...state.pokemons],
       };
     default:
       return { ...state };
