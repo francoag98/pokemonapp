@@ -12,6 +12,7 @@ import {
   FILTER_CREATED,
   REFRESH,
   FILTER_LOW_ATTACK,
+  SET_CURRENT_PAGE,
 } from "../actions/actions";
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   pokemons: [],
   pokemon: {},
   types: [],
+  currentPage: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -136,6 +138,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: [...state.pokemons],
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       };
     default:
       return { ...state };

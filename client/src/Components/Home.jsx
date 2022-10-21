@@ -18,10 +18,8 @@ margin-bottom: 3rem;
 
 `
 export const Home = ()=>{
-
-    const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
-    const pokemons = useSelector(state => state.pokemons)
+    const {pokemons, currentPage} = useSelector(state => state)
 
     const lastIndex = currentPage * pokemonsPerPage;
     const firstIndex = lastIndex - pokemonsPerPage;
@@ -37,7 +35,6 @@ export const Home = ()=>{
                 <Paginado
                 totalPokemons={pokemons.length}
                 pokemonsPerPage={pokemonsPerPage}
-                setCurrentPage={setCurrentPage}
                 currentPage={currentPage}
                 />
             </Margin>

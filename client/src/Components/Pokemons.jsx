@@ -7,7 +7,6 @@ import { getType, getByType, filterAsc, filterDesc, filterHighAttack, filterCrea
 import styled from "styled-components";
 import logo from "../img/International_Pokémon_logo.svg.png"
 
-
 const Buttons3 = styled.button`
 border: none;
 background-color: transparent;
@@ -93,6 +92,7 @@ export const Pokemons = (props)=>{
             dispatch(refresh())
         }
         dispatch(getByType(type))
+        
     }
 
     useEffect(()=>{
@@ -106,7 +106,7 @@ export const Pokemons = (props)=>{
             dispatch(filterAsc(value))
         }else if(value === "descendent"){
             dispatch(filterDesc(value))
-        }else if(value === "def"){
+        }else if(value === "default"){
             dispatch(refresh(value))
         }else if(value === "highAttack"){
             dispatch(filterHighAttack(value))

@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setCurrent } from "../redux/actions/actions";
 
 
 const StyledButton = styled.button`
@@ -19,6 +21,7 @@ color: #ef7f45;
 
 export const Paginado = ({totalPokemons, pokemonsPerPage, setCurrentPage, currentPage})=>{
     let pages = [];
+    const dispatch = useDispatch()
 
     for (let i = 1; i <= Math.ceil(totalPokemons/ pokemonsPerPage); i++) {
         pages.push(i);
@@ -29,7 +32,7 @@ export const Paginado = ({totalPokemons, pokemonsPerPage, setCurrentPage, curren
                 return (
                     <StyledButton
                         key={index}
-                        onClick={() => setCurrentPage(page)}
+                        onClick={() => dispatch(setCurrent(page))}
                         className={page === currentPage ? "active" : ""}>
                         {page}
                     </StyledButton>

@@ -12,6 +12,7 @@ export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_CREATED = "FILTER_CREATED";
 export const REFRESH = "REFRESH";
 export const FILTER_LOW_ATTACK = "FILTER_LOW_ATTACK";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
@@ -55,7 +56,9 @@ export const clearDetailPokemon = () => {
 export const createPokemon = (args) => {
   return { type: CREATE_POKEMON, payload: args };
 };
-
+export const setCurrent = (page) => {
+  return { type: SET_CURRENT_PAGE, payload: page };
+};
 export const filterAsc = () => {
   return { type: FILTER_ASCENDENTE };
 };
