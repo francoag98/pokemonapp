@@ -89,9 +89,10 @@ export const Pokemons = (props)=>{
     const selectType =(e)=>{
         const type =e.target.value
         if(type === "def"){
-            dispatch(refresh())
+            dispatch(refresh());
+        }else{
+            dispatch(getByType(type))
         }
-        dispatch(getByType(type))
         
     }
 
@@ -120,9 +121,6 @@ export const Pokemons = (props)=>{
         const creado = e.target.value;
         dispatch(filterCreated(creado))
     }
-    const refr = ()=>{
-        dispatch(refresh())
-    }
     return (
         <Responsive>
             <Imagen src={logo} alt="logo-pokemon"/>
@@ -130,7 +128,7 @@ export const Pokemons = (props)=>{
             <Aside>
                 <Parraph>Select by type</Parraph>
                 <Select name="type" key={types.id} onChange={(e)=> selectType(e)}>
-                    <Options2 value="def" >--All--</Options2>
+                    <Options2 value="def">--All--</Options2>
                     {types.map(el => <Options1 value={el.name} key={el.id}>{el.name}
                     </Options1>)}
                 </Select>
@@ -150,7 +148,7 @@ export const Pokemons = (props)=>{
                 </Select>
                 <div>
 
-                <Buttons3 onClick={()=> refr()}>Refresh</Buttons3>
+                <Buttons3 onClick={()=> dispatch(refresh())}>Refresh</Buttons3>
                 </div>
             </Aside>
             <div>

@@ -17,6 +17,7 @@ import {
 
 const initialState = {
   allPokemons: [],
+  backUpPokemons: [],
   pokemons: [],
   pokemon: {},
   types: [],
@@ -35,6 +36,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: action.payload,
         allPokemons: action.payload,
+        backUpPokemons: action.payload,
       };
     case CREATE_POKEMON:
       return {
@@ -137,7 +139,7 @@ const rootReducer = (state = initialState, action) => {
     case REFRESH:
       return {
         ...state,
-        pokemons: [...state.pokemons],
+        pokemons: state.backUpPokemons,
       };
     case SET_CURRENT_PAGE:
       return {

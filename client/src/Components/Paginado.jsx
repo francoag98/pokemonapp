@@ -19,7 +19,7 @@ color: #ef7f45;
 }
 `
 
-export const Paginado = ({totalPokemons, pokemonsPerPage, setCurrentPage, currentPage})=>{
+export const Paginado = ({totalPokemons, pokemonsPerPage, currentPage})=>{
     let pages = [];
     const dispatch = useDispatch()
 
