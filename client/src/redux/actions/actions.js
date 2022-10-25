@@ -16,7 +16,7 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 //Obtenemos pokemons
 export const getPokemons = () => (dispatch) => {
-  return fetch("http://localhost:3002/pokemons")
+  return fetch("http://localhost:3001/pokemons")
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_POKEMONS, payload: data }));
 };
@@ -24,7 +24,7 @@ export const getPokemons = () => (dispatch) => {
 //Busqueda por nombre
 export const searchByName = (name) => (dispatch) => {
   return axios
-    .get(`http://localhost:3002/pokemons?name=${name}`)
+    .get(`http://localhost:3001/pokemons?name=${name}`)
     .then((response) => {
       return dispatch({ type: GET_BY_NAME, payload: response.data });
     });
@@ -32,14 +32,14 @@ export const searchByName = (name) => (dispatch) => {
 
 //Obtenemos un solo pokemon
 export const getPokemon = (id) => (dispatch) => {
-  return fetch(`http://localhost:3002/pokemons/${id}`)
+  return fetch(`http://localhost:3001/pokemons/${id}`)
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_POKEMON, payload: data }));
 };
 
 //Obtenemos los types de los pokemons
 export const getType = () => (dispatch) => {
-  return fetch("http://localhost:3002/pokemons/type")
+  return fetch("http://localhost:3001/pokemons/type")
     .then((response) => response.json())
     .then((data) => dispatch({ type: GET_TYPE, payload: data }));
 };
