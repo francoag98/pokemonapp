@@ -12,6 +12,7 @@ font-size: 3rem;
 `
 const Assigned = styled.p`
 font-weight: bold;
+margin: 0;
 `
 
 const Formu = styled.form`
@@ -113,6 +114,23 @@ box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.89);
 -webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.89);
 -moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.89);
 position: relative;
+`
+const DivType = styled.div`
+display: flex;
+gap: 0.5rem;
+margin: 0;
+magin-top: 10px;
+padding: 0.2rem;
+`
+const BDelete = styled.p`
+cursor: pointer;
+align-items: center;
+color: red;
+justify-content: center;
+font-weight: bold;
+font-size: 1rem;
+margin: 0;
+text-align: center;
 `
 export const Form = ()=>{
     const [input, setInput] = useState({
@@ -236,6 +254,9 @@ export const Form = ()=>{
 
     const handleSelect = (e)=>{
         e.preventDefault();
+        if(input.type.includes(e.target.value)){
+            return "Type already choice"
+        }
         setInput({...input, type: [...input.type, e.target.value ]})
     }
     const handleSubmit = async (e)=>{
@@ -243,12 +264,27 @@ export const Form = ()=>{
         if(validation(true)){
             await axios.post("http://localhost:3001/pokemons", input)
             dispatch(createPokemon(input))
+            setInput({
+                name: "",
+                hp:1,
+                attack: 1,
+                defense:1 ,
+                speed: 1,
+                height: 1,
+                weight:1 ,
+                img: "",
+                type:[]
+            })
             alert("Pokemon Created")
             history.push("/Home")
         }else {
             alert("Complete form")
         }
+
         
+    }
+    const handleDelete = (e)=>{
+        setInput({...input, type: input.type.filter(type => type !== e)})
     }
     return (
         <div>
@@ -299,10 +335,12 @@ export const Form = ()=>{
             {error.img && <Parrafo>{error.img}</Parrafo>}
             <Divs>
             <Labels htmlFor="type">Type:</Labels>
-            <Selects name="type" key={types.id} onChange={(e)=> handleSelect(e)}>{types.map(type =><Options key={type.id}> {type.name}</Options> )}</Selects>
+            <Selects name="type" key={types.forEach(el=> el.id)} onChange={(e)=> handleSelect(e)}>{types.map(type =><Options key={type.id}> {type.name}</Options> )}</Selects>
             </Divs>
             {error.type && <TypeE>{error.type}</TypeE>}
-            <Assigned>Type Assigned: {input.type.join(", ")} </Assigned>
+            <div>
+                <Assigned>Type Assigned:</Assigned>{input.type.map(el=>{return (<DivType key={el} value={el}><Assigned key={el} >{el}</Assigned><BDelete onClick={()=>handleDelete(el)}>x</BDelete></DivType>)})}
+            </div>
             <DivButton>
             <Links to="/Home">
                 <Button3>Back</Button3>

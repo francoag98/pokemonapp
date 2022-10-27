@@ -108,7 +108,7 @@ export const Pokemons = (props)=>{
         }else if(value === "descendent"){
             dispatch(filterDesc(value))
         }else if(value === "default"){
-            dispatch(refresh(value))
+            dispatch(refresh())
         }else if(value === "highAttack"){
             dispatch(filterHighAttack(value))
 
@@ -121,6 +121,7 @@ export const Pokemons = (props)=>{
         const creado = e.target.value;
         dispatch(filterCreated(creado))
     }
+    
     return (
         <Responsive>
             <Imagen src={logo} alt="logo-pokemon"/>
@@ -148,7 +149,7 @@ export const Pokemons = (props)=>{
                 </Select>
                 <div>
 
-                <Buttons3 onClick={()=> dispatch(refresh())}>Refresh</Buttons3>
+                <Buttons3 onClick={()=>{dispatch(refresh()); }}>Refresh</Buttons3>
                 </div>
             </Aside>
             <div>
