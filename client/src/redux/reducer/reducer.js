@@ -53,11 +53,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         types: action.payload,
       };
-    case CLEAR_DETAIL_POKEMON:
-      return {
-        ...state,
-        pokemon: {},
-      };
     case FILTER_BY_TYPE:
       return {
         ...state,

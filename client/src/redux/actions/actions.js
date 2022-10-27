@@ -7,7 +7,6 @@ export const GET_TYPE = "GET_TYPE";
 export const FILTER_ASCENDENTE = "FILTER_ASCENDENTE";
 export const FILTER_DESCENDENTE = "FILTER_DESCENDENTE";
 export const FILTER_HIGH_ATTACK = "FILTER_HIGH_ATTACK";
-export const CLEAR_DETAIL_POKEMON = "CLEAR_DETAIL_POKEMON";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_CREATED = "FILTER_CREATED";
 export const REFRESH = "REFRESH";
@@ -46,10 +45,6 @@ export const getType = () => (dispatch) => {
 
 export const getByType = (type) => {
   return { type: FILTER_BY_TYPE, payload: type };
-};
-
-export const clearDetailPokemon = () => {
-  return { type: CLEAR_DETAIL_POKEMON };
 };
 
 //Creamos un pokemon
