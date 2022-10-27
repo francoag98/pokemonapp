@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setCurrent } from "../redux/actions/actions";
 
@@ -19,9 +19,10 @@ color: #ef7f45;
 }
 `
 
-export const Paginado = ({totalPokemons, pokemonsPerPage, currentPage})=>{
+export const Paginado = ({totalPokemons, pokemonsPerPage})=>{
     let pages = [];
     const dispatch = useDispatch()
+    const currentPage = useSelector(state => state.currentPage)
 
     for (let i = 1; i <= Math.ceil(totalPokemons/ pokemonsPerPage); i++) {
         pages.push(i);

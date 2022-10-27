@@ -78,9 +78,6 @@ export const PokemonDetail = (props)=>{
 
     useEffect(()=>{
         dispatch(getPokemon(id))
-        return ()=>{
-            dispatch(clearDetailPokemon())
-        }
     },[dispatch, id]);
 
     

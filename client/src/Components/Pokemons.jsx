@@ -3,7 +3,7 @@ import { PokemonCard } from "./PokemonCard";
 import { NavBar } from "./Nav";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getType, getByType, filterAsc, filterDesc, filterHighAttack, filterCreated, filterLowAttack, refresh } from "../redux/actions/actions";
+import { getType, getByType, filterAsc, filterDesc, filterHighAttack, filterCreated, filterLowAttack, refresh, setCurrent } from "../redux/actions/actions";
 import styled from "styled-components";
 import logo from "../img/International_Pokémon_logo.svg.png"
 
@@ -90,8 +90,10 @@ export const Pokemons = (props)=>{
         const type =e.target.value
         if(type === "def"){
             dispatch(refresh());
+            dispatch(setCurrent(1));
         }else{
             dispatch(getByType(type))
+            dispatch(setCurrent(1));
         }
         
     }
@@ -104,16 +106,20 @@ export const Pokemons = (props)=>{
         e.preventDefault();
         const value = e.target.value;
         if(value === "ascendent"){
+            dispatch(setCurrent(1));
             dispatch(filterAsc(value))
         }else if(value === "descendent"){
+            dispatch(setCurrent(1));
             dispatch(filterDesc(value))
-        }else if(value === "default"){
-            dispatch(refresh())
-        }else if(value === "highAttack"){
-            dispatch(filterHighAttack(value))
-
-        }else{
+        }else if(value === "lowAttack"){
+            dispatch(setCurrent(1));
             dispatch(filterLowAttack(value))
+        }else if(value === "highAttack"){
+            dispatch(setCurrent(1));
+            dispatch(filterHighAttack(value))
+        }else{
+            dispatch(setCurrent(1));
+            dispatch(refresh())
         }
     }
     const orderCreated = (e)=>{
@@ -135,7 +141,7 @@ export const Pokemons = (props)=>{
                 </Select>
                 <Parraph>Order by alphabet</Parraph>
                 <Select name="order" onChange={(e)=> orderBy(e)}>
-                    <Options2 value="default" >Normal order</Options2>
+                    <Options2 value="normal" >Normal order</Options2>
                     <Options1 value="ascendent">A to Z</Options1>
                     <Options1 value="descendent">Z to A</Options1>
                     <Options1 value="highAttack">+ Attack</Options1>
