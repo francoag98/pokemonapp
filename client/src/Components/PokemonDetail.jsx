@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearDetailPokemon, getPokemon } from "../redux/actions/actions";
+import { clearDetail, getPokemon } from "../redux/actions/actions";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -78,6 +78,9 @@ export const PokemonDetail = (props)=>{
 
     useEffect(()=>{
         dispatch(getPokemon(id))
+        return ()=> {
+            dispatch(clearDetail())
+        }
     },[dispatch, id]);
 
     

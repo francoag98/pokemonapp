@@ -12,6 +12,7 @@ import {
   REFRESH,
   FILTER_LOW_ATTACK,
   SET_CURRENT_PAGE,
+  CLEAR_DETAIL,
 } from "../actions/actions";
 
 const initialState = {
@@ -134,6 +135,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemons: state.backUpPokemons,
+      };
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        pokemon: {},
       };
     case SET_CURRENT_PAGE:
       return {
